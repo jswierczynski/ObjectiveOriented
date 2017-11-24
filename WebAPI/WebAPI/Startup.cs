@@ -26,6 +26,7 @@ namespace WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+			services.AddCors();
 
 			var connection = @"Server=(localdb)\mssqllocaldb;Database=WebAPI.Objectives;Trusted_Connection=True;";
 			services.AddDbContext<ObjectivesContext>(options => options.UseSqlServer(connection));
@@ -39,7 +40,11 @@ namespace WebAPI
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMvc();
+			//Enables use of CORS from any origin for all methods.
+			app.UseCors(
+				options => options.AllowAnyOrigin().AllowAnyMethod());
+
+			app.UseMvc();
         }
     }
 }
