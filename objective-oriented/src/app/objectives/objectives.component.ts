@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ObjectivesService } from '../services/objectives.service';
+import { error } from 'selenium-webdriver';
+import { AppError } from '../Common/app-error';
+import { NotFoundError } from '../Common/not-found-error';
 
 @Component({
   selector: 'objectives',
@@ -8,13 +11,31 @@ import { ObjectivesService } from '../services/objectives.service';
 })
 export class ObjectivesComponent implements OnInit {
 
-  objectives: any[];
+  objectives: any;
 
   constructor(private service: ObjectivesService) { }
 
   ngOnInit() {
     this.service.getAll()
-      .subscribe(objectives => this.objectives = objectives);
+      .subscribe(data => this.objectives = data);
   }
 
+  completeObjective(objective)
+  {
+    let index = this.objectives.indexOf(objective);
+    this.objectives.splice(index, 1);
+    
+    objective.complete = true;
+
+    this.service.update(objective)
+      .subscribe(
+        null,
+        (error: AppError) => {
+          this.objectives.splice(index, 0, objective);
+
+          if(error instanceof NotFoundError)
+            alert('This objective is already complete.');
+          else throw error;
+        });
+  }
 }

@@ -1,7 +1,24 @@
 
 
-<ul class="list-group">
-  <li *ngFor="let objective of objectives" class="list-group-item">
-    {{ objective.title }}
+<!-- <ul class="list-group">
+  <li *ngFor="let objective of objectives">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        {{ objective.title }}
+      </div>
+    </div>
   </li>
-</ul>
+</ul> -->
+
+
+<div *ngFor="let objective of objectives" >
+  <div *ngIf="!objective.complete" class="panel panel-default">
+    <div class="panel-heading">
+      {{ objective.title }}
+    </div>
+    <div *ngIf="objective.description" class="panel-body">
+      {{ objective.description }}
+    </div>
+    <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
+  </div>
+</div>

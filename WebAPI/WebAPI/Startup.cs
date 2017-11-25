@@ -42,7 +42,7 @@ namespace WebAPI
 
 			//Enables use of CORS from any origin for all methods.
 			app.UseCors(
-				options => options.AllowAnyOrigin().AllowAnyMethod());
+				options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
 			app.UseMvc();
         }
