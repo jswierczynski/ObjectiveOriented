@@ -1,0 +1,29 @@
+<form class="form-group" #f="ngForm" (ngSubmit)="createObjective(f.value)">
+  <h2>{{ title }}</h2>
+
+  <!-- Input for Title -->
+  <div>
+    <label for="inputTitle">Title</label>
+    <input type="text" 
+      ngModel #inputTitle="ngModel"
+      name="inputTitle" id="inputTitle"
+      class="form-control" 
+      name="title" 
+      required minlength="2" autofocus
+    >
+    <!-- Validation Message for Title -->
+    <div class="alert alert-danger" *ngIf="inputTitle.touched && inputTitle.invalid">
+      <div *ngIf="inputTitle.errors.required">Title is required.</div>
+      <div *ngIf="inputTitle.errors.minlength">
+        Title should be at least {{ inputTitle.errors.minlength.requiredLength }} characters.
+      </div>
+    </div>
+  </div>
+
+  <!-- Input for Description -->
+  <label for="inputDescription">Description</label>
+  <textarea ngModel class="form-control" id="inputDescription" name="description" rows="3"></textarea>
+
+  <button class="btn btn-primary" [disabled]="!f.valid" type="submit">Submit</button>
+
+</form>

@@ -23,7 +23,12 @@ export class DataService {
   }
 
   create(resource) {
-    return this.http.post(this.url, JSON.stringify(resource))
+    return this.http.post(
+      this.url, 
+      JSON.stringify(resource), 
+      { 
+        headers: new HttpHeaders().append('Content-Type', 'application/json')
+      })
       .catch(this.handleError);
   }
 
