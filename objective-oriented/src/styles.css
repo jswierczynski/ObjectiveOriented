@@ -11,4 +11,9 @@ label {
 
 .btn {
     margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-inPanel {
+    margin-left: 5px;
 }

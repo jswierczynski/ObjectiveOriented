@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ObjectivesService } from '../services/objectives.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'objective-form',
@@ -9,7 +10,9 @@ import { ObjectivesService } from '../services/objectives.service';
 export class ObjectiveFormComponent implements OnInit {
   title: string = "New Objective";
 
-  constructor(private service: ObjectivesService) { }
+  constructor(
+    private service: ObjectivesService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -19,7 +22,8 @@ export class ObjectiveFormComponent implements OnInit {
     this.service.create(objective)
       .subscribe(data => {
         console.log(data);
-      });
+        this.router.navigate(['/']);
+      }); 
   }
 
 }

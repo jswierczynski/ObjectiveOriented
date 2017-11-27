@@ -1,15 +1,6 @@
+<h2>Your Objectives</h2>
 
-
-<!-- <ul class="list-group">
-  <li *ngFor="let objective of objectives">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        {{ objective.title }}
-      </div>
-    </div>
-  </li>
-</ul> -->
-
+<button class="btn btn-primary" [routerLink]="['/objective']">Add Objective</button>
 
 <div *ngFor="let objective of objectives" >
   <div *ngIf="!objective.complete" class="panel panel-default">
@@ -19,6 +10,6 @@
     <div *ngIf="objective.description" class="panel-body">
       {{ objective.description }}
     </div>
-    <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
+    <button (click)="completeObjective(objective)" class="btn btn-primary btn-inPanel">Complete</button>
   </div>
 </div>
