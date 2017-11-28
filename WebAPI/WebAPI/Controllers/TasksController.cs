@@ -22,12 +22,9 @@ namespace WebAPI.Controllers
 
         // GET: api/Tasks
         [HttpGet]
-        public IEnumerable<ObjectiveTaskBinding> GetTasks()
+        public IEnumerable<ObjectiveTask> GetTasks()
         {
-			List<ObjectiveTaskBinding> tasks = new List<ObjectiveTaskBinding>();
-			foreach (var task in _context.Tasks.Include("ParentObjective").Include("ParentTask"))
-				tasks.Add(new ObjectiveTaskBinding(task));
-			return tasks.AsEnumerable();
+			return _context.Tasks.Include("ParentObjective").Include("ParentTask");
         }
 
         // GET: api/Tasks/5
@@ -48,7 +45,7 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(new ObjectiveTaskBinding(objectiveTask));
+			return Ok(objectiveTask);
         }
 
         // PUT: api/Tasks/5
@@ -101,7 +98,7 @@ namespace WebAPI.Controllers
             _context.Tasks.Add(objectiveTask);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetObjectiveTask", new { id = objectiveTask.Id }, new ObjectiveTaskBinding(objectiveTask));
+            return CreatedAtAction("GetObjectiveTask", new { id = objectiveTask.Id }, objectiveTask);
         }
 
         // DELETE: api/Tasks/5

@@ -22,12 +22,9 @@ namespace WebAPI.Controllers
 
         // GET: api/Objectives
         [HttpGet]
-        public IEnumerable<ObjectiveBinding> GetObjectives()
+        public IEnumerable<Objective> GetObjectives()
         {
-			List<ObjectiveBinding> objectives = new List<ObjectiveBinding>();
-			foreach (var objective in _context.Objectives.Include("Tasks"))
-				objectives.Add(new ObjectiveBinding(objective));
-			return objectives;
+			return _context.Objectives.Include("Tasks");
         }
 
         // GET: api/Objectives/5
@@ -47,7 +44,7 @@ namespace WebAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(new ObjectiveBinding(objective));
+            return Ok(objective);
         }
 
         // PUT: api/Objectives/5

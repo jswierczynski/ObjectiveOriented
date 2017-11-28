@@ -12,6 +12,17 @@ namespace WebAPI.Models
 			: base(options)
 		{ }
 
+		//protected override void OnModelCreating(ModelBuilder modelBuilder)
+		//{
+		//	modelBuilder.Entity<Objective>()
+		//		.Ignore(t => t.TaskIds);
+
+		//	modelBuilder.Entity<ObjectiveTask>()
+		//		.Ignore(x => x.ParentObjectiveId)
+		//		.Ignore(x => x.ParentTaskId)
+		//		.Ignore(x => x.SubTaskIds);
+		//}
+
 		public DbSet<Objective> Objectives { get; set; }
 		public DbSet<ObjectiveTask> Tasks { get; set; }
     }
