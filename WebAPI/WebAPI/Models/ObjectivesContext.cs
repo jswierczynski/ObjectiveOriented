@@ -13,5 +13,6 @@ namespace WebAPI.Models
 		{ }
 
 		public DbSet<Objective> Objectives { get; set; }
+		public DbSet<ObjectiveTask> Tasks { get; set; }
     }
 }

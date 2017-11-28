@@ -11,9 +11,10 @@ using WebAPI.Models;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ObjectivesContext))]
-    partial class ObjectivesContextModelSnapshot : ModelSnapshot
+    [Migration("20171127040606_Add 2-way relationship for tasks")]
+    partial class Add2wayrelationshipfortasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +44,7 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int?>("ParentObjectiveId");
+                    b.Property<int?>("ObjectiveParentId");
 
                     b.Property<int?>("ParentTaskId");
 
@@ -51,7 +52,7 @@ namespace WebAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentObjectiveId");
+                    b.HasIndex("ObjectiveParentId");
 
                     b.HasIndex("ParentTaskId");
 
@@ -60,9 +61,9 @@ namespace WebAPI.Migrations
 
             modelBuilder.Entity("WebAPI.Models.ObjectiveTask", b =>
                 {
-                    b.HasOne("WebAPI.Models.Objective", "ParentObjective")
+                    b.HasOne("WebAPI.Models.Objective", "ObjectiveParent")
                         .WithMany("Tasks")
-                        .HasForeignKey("ParentObjectiveId");
+                        .HasForeignKey("ObjectiveParentId");
 
                     b.HasOne("WebAPI.Models.ObjectiveTask", "ParentTask")
                         .WithMany("SubTasks")

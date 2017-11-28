@@ -22,9 +22,12 @@ namespace WebAPI.Controllers
 
         // GET: api/Objectives
         [HttpGet]
-        public IEnumerable<Objective> GetObjectives()
+        public IEnumerable<ObjectiveBinding> GetObjectives()
         {
-            return _context.Objectives;
+			List<ObjectiveBinding> objectives = new List<ObjectiveBinding>();
+			foreach (var objective in _context.Objectives.Include("Tasks"))
+				objectives.Add(new ObjectiveBinding(objective));
+			return objectives;
         }
 
         // GET: api/Objectives/5
@@ -36,14 +39,15 @@ namespace WebAPI.Controllers
                 return BadRequest(ModelState);
             }
 
-            var objective = await _context.Objectives.SingleOrDefaultAsync(m => m.Id == id);
+            var objective = await _context.Objectives
+				.Include("Tasks").SingleOrDefaultAsync(m => m.Id == id);
 
             if (objective == null)
             {
                 return NotFound();
             }
 
-            return Ok(objective);
+            return Ok(new ObjectiveBinding(objective));
         }
 
         // PUT: api/Objectives/5

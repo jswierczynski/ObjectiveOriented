@@ -11,9 +11,10 @@ using WebAPI.Models;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ObjectivesContext))]
-    partial class ObjectivesContextModelSnapshot : ModelSnapshot
+    [Migration("20171127040825_Change-name-toParentObjective")]
+    partial class ChangenametoParentObjective
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -11,9 +11,10 @@ using WebAPI.Models;
 namespace WebAPI.Migrations
 {
     [DbContext(typeof(ObjectivesContext))]
-    partial class ObjectivesContextModelSnapshot : ModelSnapshot
+    [Migration("20171127024851_Added Tasks.")]
+    partial class AddedTasks
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,30 +44,30 @@ namespace WebAPI.Migrations
 
                     b.Property<string>("Description");
 
-                    b.Property<int?>("ParentObjectiveId");
+                    b.Property<int?>("ObjectiveId");
 
-                    b.Property<int?>("ParentTaskId");
+                    b.Property<int?>("ObjectiveTaskId");
 
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentObjectiveId");
+                    b.HasIndex("ObjectiveId");
 
-                    b.HasIndex("ParentTaskId");
+                    b.HasIndex("ObjectiveTaskId");
 
                     b.ToTable("Tasks");
                 });
 
             modelBuilder.Entity("WebAPI.Models.ObjectiveTask", b =>
                 {
-                    b.HasOne("WebAPI.Models.Objective", "ParentObjective")
+                    b.HasOne("WebAPI.Models.Objective")
                         .WithMany("Tasks")
-                        .HasForeignKey("ParentObjectiveId");
+                        .HasForeignKey("ObjectiveId");
 
-                    b.HasOne("WebAPI.Models.ObjectiveTask", "ParentTask")
+                    b.HasOne("WebAPI.Models.ObjectiveTask")
                         .WithMany("SubTasks")
-                        .HasForeignKey("ParentTaskId");
+                        .HasForeignKey("ObjectiveTaskId");
                 });
 #pragma warning restore 612, 618
         }
