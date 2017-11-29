@@ -1,0 +1,10 @@
+<h4>Subtasks
+
+</h4>
+
+<label>Sub-Task Progress: {{ taskCompletion }}%</label>
+<div class="progress">
+  <div class="progress-bar" role="progressbar" [style.width]="taskCompletion + '%'">
+    <span class="sr-only">{{ taskCompletion }}% Complete</span>
+  </div>
+</div>

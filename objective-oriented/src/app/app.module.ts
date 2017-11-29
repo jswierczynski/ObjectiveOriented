@@ -11,12 +11,14 @@ import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './Common/app-error-handler';
 import { HttpClientModule } from '@angular/common/http';
 import { ObjectiveFormComponent } from './objective-form/objective-form.component';
+import { SubtasksComponent } from './subtasks/subtasks.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ObjectivesComponent,
-    ObjectiveFormComponent
+    ObjectiveFormComponent,
+    SubtasksComponent
   ],
   imports: [
     BrowserModule,
