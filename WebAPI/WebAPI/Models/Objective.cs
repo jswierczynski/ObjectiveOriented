@@ -61,5 +61,20 @@ namespace WebAPI.Models
 				return count;
 			}
 		}
+
+		public Double TaskCompletion
+		{
+			get
+			{
+				int total = TotalTasks;
+
+				if (total == 0)
+					return 0;
+
+				int open = OpenTasks;
+
+				return (((total - open) * 1.0) / (total * 1.0)) * 100;
+			}
+		}
 	}
 }

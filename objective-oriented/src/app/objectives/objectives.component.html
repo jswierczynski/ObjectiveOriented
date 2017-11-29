@@ -10,6 +10,14 @@
     <div *ngIf="objective.description" class="panel-body">
       {{ objective.description }}
     </div>
+    <div *ngIf="objective.totalTasks && objective.totalTasks > 0" style="margin-left:5px; margin-right:5px;">
+      <label>Sub-Task Progress</label>
+      <div class="progress">
+        <div class="progress-bar" role="progressbar" [style.width]="objective.taskCompletion + '%'">
+          <span class="sr-only">{{ objective.taskCompletion }}% Complete</span>
+        </div>
+      </div>
+    </div>
     <button (click)="completeObjective(objective)" class="btn btn-primary btn-inPanel">Complete</button>
   </div>
 </div>
