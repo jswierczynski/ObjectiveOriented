@@ -3,16 +3,5 @@
 <button class="btn btn-primary" [routerLink]="['/objective']">Add Objective</button>
 
 <div *ngFor="let objective of objectives" >
-  <div *ngIf="!objective.complete" class="card">
-    <div class="card-body">
-      <h4 class="card-title">{{ objective.title }}</h4>
-      <div *ngIf="objective.description" class="panel-body">
-        {{ objective.description }}
-      </div>
-      <div *ngIf="objective.totalTasks && objective.totalTasks > 0">
-        <subtasks [taskCompletion]="objective.taskCompletion" ></subtasks>
-      </div>
-      <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
-    </div>
-  </div>
+  <objective [objective]="objective"></objective>
 </div>
