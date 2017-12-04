@@ -1,12 +1,23 @@
 <div *ngIf="!objective.complete" class="card">
-    <div class="card-body">
-      <h4 class="card-title">{{ objective.title }}</h4>
-      <div *ngIf="objective.description" class="panel-body">
-        {{ objective.description }}
-      </div>
-      <div *ngIf="objective.totalTasks && objective.totalTasks > 0">
-        <subtasks [taskCompletion]="objective.taskCompletion" ></subtasks>
-      </div>
-      <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
+  <div class="card-body">
+    <h4 class="card-title">{{ objective.title }}</h4>
+
+    <!-- Show the description of the task. -->
+    <div *ngIf="objective.description" class="panel-body">
+      {{ objective.description }}
     </div>
+
+    <!-- Show SubTasks on the card if Objective contains any. -->
+    <div *ngIf="objective.totalTasks && objective.totalTasks > 0">
+      <subtasks 
+        [taskCompletion]="objective.taskCompletion"
+        [taskIds]="objective.taskIds">
+      </subtasks>
+    </div>
+
+    <!-- Buttons at the bottom of the card. -->
+    <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
+    <button *ngIf="objective.totalTasks && objective.totalTasks > 0" 
+      (click)="subtasks.toggleShowSubtasks()" class="btn btn-primary">Show Subtasks</button>
   </div>
+</div>

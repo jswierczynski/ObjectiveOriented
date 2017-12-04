@@ -6,3 +6,8 @@
     <span class="sr-only">{{ taskCompletion }}% Complete</span>
   </div>
 </div>
+<div *ngIf="showSubtasks">
+  <div *ngFor="let taskId of taskIds" >
+    <task [id]="taskId"></task>
+  </div>
+</div>

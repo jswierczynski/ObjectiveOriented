@@ -13,6 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ObjectiveFormComponent } from './objective-form/objective-form.component';
 import { SubtasksComponent } from './subtasks/subtasks.component';
 import { ObjectiveComponent } from './objective/objective.component';
+import { TaskComponent } from './task/task.component';
+import { TasksService } from './services/tasks.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ObjectiveComponent } from './objective/objective.component';
     ObjectivesComponent,
     ObjectiveFormComponent,
     SubtasksComponent,
-    ObjectiveComponent
+    ObjectiveComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { ObjectiveComponent } from './objective/objective.component';
   ],
   providers: [
     ObjectivesService,
+    TasksService,
     {
       provide: ErrorHandler,
       useClass: AppErrorHandler

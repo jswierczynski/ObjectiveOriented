@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { ObjectivesService } from '../services/objectives.service';
 import { AppError } from '../Common/app-error';
 import { NotFoundError } from '../Common/not-found-error';
+import { SubtasksComponent } from '../subtasks/subtasks.component';
 
 @Component({
   selector: 'objective',
@@ -10,6 +11,9 @@ import { NotFoundError } from '../Common/not-found-error';
 })
 export class ObjectiveComponent implements OnInit {
   @Input() objective: any;
+
+  @ViewChild(SubtasksComponent)
+  subtasks: SubtasksComponent;
 
   constructor(private service: ObjectivesService) { }
 

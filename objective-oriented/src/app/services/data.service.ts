@@ -22,6 +22,11 @@ export class DataService {
       .catch(this.handleError);
   }
 
+  get(id) {
+    return this.http.get(this.url + '/' + id)
+      .catch(this.handleError);
+  }
+
   create(resource) {
     return this.http.post(
       this.url, 
