@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { error } from 'selenium-webdriver';
+import { AppError } from '../Common/app-error';
 
 @Component({
   selector: 'task',
@@ -9,10 +11,7 @@ import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 })
 export class TaskComponent implements AfterViewInit {
   @Input() id: number;
-  task: { 
-    subTaskIds: number[],
-    title: string
-  }
+  task: any;
 
   constructor(private service: TasksService) { }
 
@@ -23,5 +22,15 @@ export class TaskComponent implements AfterViewInit {
       });
   }
 
+  completeTask(){
+    this.task.complete = true;
 
+    this.service.update(this.task)
+      .subscribe(
+        null,
+        (error: AppError) => {
+          throw error;
+        }
+      )
+  }
 }

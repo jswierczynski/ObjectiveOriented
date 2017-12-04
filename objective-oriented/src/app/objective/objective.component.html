@@ -16,8 +16,13 @@
     </div>
 
     <!-- Buttons at the bottom of the card. -->
-    <button (click)="completeObjective(objective)" class="btn btn-primary">Complete</button>
+    <button (click)="completeObjective(objective)" 
+      class="btn" 
+      [class.btn-primary]="objective.openTasks === 0"
+      [class.btn-secondary]="objective.openTasks > 0" >
+        Complete
+    </button>
     <button *ngIf="objective.totalTasks && objective.totalTasks > 0" 
-      (click)="subtasks.toggleShowSubtasks()" class="btn btn-primary">Show Subtasks</button>
+      (click)="subtasks.toggleShowSubtasks()" class="btn btn-primary">Show Tasks</button>
   </div>
 </div>
