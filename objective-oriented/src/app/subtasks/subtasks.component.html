@@ -8,6 +8,6 @@
 </div>
 <div *ngIf="showSubtasks">
   <div *ngFor="let taskId of taskIds" >
-    <task [id]="taskId"></task>
+    <task [id]="taskId" (completed)="receiveTaskCompletedEvent($event)" ></task>
   </div>
 </div>

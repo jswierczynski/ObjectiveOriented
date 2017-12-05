@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { fail } from 'assert';
 import { Console } from '@angular/core/src/console';
 
@@ -10,6 +10,7 @@ import { Console } from '@angular/core/src/console';
 export class SubtasksComponent implements OnInit {
   @Input() taskCompletion: number;
   @Input() taskIds: number[];
+  @Output() taskCompleted: EventEmitter<any> = new EventEmitter();
 
   showSubtasks: Boolean = false;
 
@@ -21,6 +22,10 @@ export class SubtasksComponent implements OnInit {
   @Input() toggleShowSubtasks()
   {
     this.showSubtasks = !this.showSubtasks;
+  }
+
+  receiveTaskCompletedEvent(task) {
+    this.taskCompleted.emit(task);
   }
 
 }

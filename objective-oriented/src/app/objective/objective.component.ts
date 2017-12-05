@@ -10,7 +10,15 @@ import { SubtasksComponent } from '../subtasks/subtasks.component';
   styleUrls: ['./objective.component.css']
 })
 export class ObjectiveComponent implements OnInit {
-  @Input() objective: any;
+  @Input() objective: {
+    complete: Boolean,
+    openTasks: number,
+    totalTasks: number,
+    taskCompletion: number,
+    id: number,
+    title: string,
+    description: string
+  };
 
   @ViewChild(SubtasksComponent)
   subtasks: SubtasksComponent;
@@ -34,5 +42,18 @@ export class ObjectiveComponent implements OnInit {
             alert('This objective is already complete.');
           else throw error;
         });
+  }
+
+  receivedTaskCompleted(task) {
+    this.objective.openTasks = this.objective.openTasks - 1;
+    this.evaluateTaskCompletion();
+  }
+
+  evaluateTaskCompletion() {
+    if(this.objective.totalTasks > 0) {
+      this.objective.taskCompletion = ((this.objective.totalTasks - this.objective.openTasks) / this.objective.totalTasks) * 100;
+    } else {
+      this.objective.taskCompletion = 0;
+    }
   }
 }

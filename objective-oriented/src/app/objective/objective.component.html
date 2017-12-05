@@ -11,7 +11,8 @@
     <div *ngIf="objective.totalTasks && objective.totalTasks > 0">
       <subtasks 
         [taskCompletion]="objective.taskCompletion"
-        [taskIds]="objective.taskIds">
+        [taskIds]="objective.taskIds"
+        (taskCompleted)="receivedTaskCompleted($event)">
       </subtasks>
     </div>
 

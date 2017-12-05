@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TasksService } from '../services/tasks.service';
 import { AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { error } from 'selenium-webdriver';
@@ -11,6 +11,7 @@ import { AppError } from '../Common/app-error';
 })
 export class TaskComponent implements AfterViewInit {
   @Input() id: number;
+  @Output() completed: EventEmitter<any> = new EventEmitter();
   task: any;
 
   constructor(private service: TasksService) { }
@@ -27,7 +28,9 @@ export class TaskComponent implements AfterViewInit {
 
     this.service.update(this.task)
       .subscribe(
-        null,
+        (value => {
+          this.completed.emit(this.task);
+        }),
         (error: AppError) => {
           throw error;
         }
